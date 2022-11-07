@@ -57,7 +57,6 @@ impl<T: Display + Default> List<T> {
             Nil => None,
         }
     }
-
     pub fn get(&self, index: usize) -> Option<&T> {
         let mut list = self;
         let mut res_head: Option<&T> = None;
@@ -74,7 +73,6 @@ impl<T: Display + Default> List<T> {
         }
         res_head
     }
-
     pub fn get_mut(&mut self, index: usize) -> Option<&mut T> {
         let mut list = self;
         let mut res_head: Option<&mut T> = None;
