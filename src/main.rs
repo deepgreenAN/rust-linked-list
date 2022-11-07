@@ -1,6 +1,6 @@
 use std::{
     fmt::Display,
-    ops::{Index, IndexMut},
+    ops::{Index, IndexMut, RangeFrom},
 };
 
 use List::{Cons, Nil};
@@ -89,6 +89,34 @@ impl<T: Display + Default> List<T> {
         }
         res_head
     }
+    pub fn rest(&self, from: usize) -> &List<T> {
+        let mut list = self;
+        for _ in 0..from {
+            match list {
+                Cons(_, tail) => {
+                    list = tail.as_ref();
+                }
+                Nil => {
+                    break;
+                }
+            }
+        }
+        list
+    }
+    pub fn rest_mut(&mut self, from: usize) -> &mut List<T> {
+        let mut list = self;
+        for _ in 0..from {
+            match list {
+                Cons(_, tail) => {
+                    list = tail.as_mut();
+                }
+                Nil => {
+                    break;
+                }
+            }
+        }
+        list
+    }
 }
 
 impl<T: Display + Default> Display for List<T> {
@@ -173,6 +201,13 @@ impl<T: Display + Default> Index<usize> for List<T> {
     }
 }
 
+impl<T: Display + Default> Index<RangeFrom<usize>> for List<T> {
+    type Output = List<T>;
+    fn index(&self, index: RangeFrom<usize>) -> &Self::Output {
+        self.rest(index.start)
+    }
+}
+
 // -------------------------------------------------------------------------------------------------
 // index_mutの実装
 
@@ -183,6 +218,12 @@ impl<T: Display + Default> IndexMut<usize> for List<T> {
         } else {
             panic!("out of bound.");
         }
+    }
+}
+
+impl<T: Display + Default> IndexMut<RangeFrom<usize>> for List<T> {
+    fn index_mut(&mut self, index: RangeFrom<usize>) -> &mut Self::Output {
+        self.rest_mut(index.start)
     }
 }
 
@@ -198,5 +239,8 @@ fn main() {
     println!("list from vec:{}", list_from_vec);
     println!("list[2]: {}", list_from_vec[2]);
     list_from_vec[3] = 3;
+    println!("list from vec:{}", list_from_vec);
+    println!("rest from 2: {}", list_from_vec[2..]);
+    list_from_vec[2..] = Cons(300, Box::new(Cons(200, Box::new(Cons(100, Box::new(Nil))))));
     println!("list from vec:{}", list_from_vec);
 }
