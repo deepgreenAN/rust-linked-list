@@ -1,4 +1,4 @@
-# Rustでリンクトリストの練習
+# Rustで単方向リンクトリストの練習
 
 以下のように`Vec`のように利用できるトレイト等の実装の練習．
 
@@ -8,3 +8,4 @@
 - `iter_mut`
 - `usize`に対する`Index`,`IndexMut`
 - `Range`に対する`Index`,`IndexMut`
+- `vec!`のようなマクロ
