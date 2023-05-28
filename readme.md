@@ -1,5 +1,10 @@
-# rustでlinked-list
-- `collect`
+# Rustでリンクトリストの練習
+
+以下のように`Vec`のように利用できるトレイト等の実装の練習．
+
+- `FromIterator`
 - `into_iter`
 - `iter`
-- インデキシング
+- `iter_mut`
+- `usize`に対する`Index`,`IndexMut`
+- `Range`に対する`Index`,`IndexMut`
