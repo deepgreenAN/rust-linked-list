@@ -9,3 +9,15 @@
 - `usize`に対する`Index`,`IndexMut`
 - `Range`に対する`Index`,`IndexMut`
 - `vec!`のようなマクロ
+
+## テスト
+
+```shell
+cargo test
+```
+
+## Run
+
+```shell
+cargo run
+```
